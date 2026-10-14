@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://factory-franchise.eu/sitemap.xml
