@@ -1,5 +1,5 @@
 // Factory Franchise site behaviour. No dependencies.
-import { initChat } from "./chat.mjs";
+import { initChat } from "./chat.mjs?v=29";
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Menu

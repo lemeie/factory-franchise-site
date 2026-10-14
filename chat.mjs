@@ -1,5 +1,5 @@
 // Text-only AI chat. The service must be explicitly enabled in the page metadata.
-const CONTACT = "leon@supplychat.ai,hans@supplychat.ai";
+const CONTACT = "hello@factory-franchise.eu";
 const ARROW = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5"/></svg>';
 const STOP = '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="5" y="5" width="10" height="10" rx="1" fill="currentColor" stroke="none"/></svg>';
 const COPY = '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="7" y="3" width="9" height="11" rx="2"/><path d="M4 6v9a2 2 0 0 0 2 2h7"/></svg>';
@@ -9,7 +9,9 @@ const bodySize = messages => new TextEncoder().encode(JSON.stringify({messages})
 
 export function chatEndpoint(value, base) {
   const url = new URL(value || "/api/chat", base);
-  if (url.username || url.password || !(url.protocol === "https:" || (url.protocol === "http:" && url.origin === new URL(base).origin))) throw new Error("Invalid chat endpoint");
+  const page = new URL(base), loopback = ["localhost", "127.0.0.1", "[::1]"];
+  const local = loopback.includes(page.hostname) && loopback.includes(url.hostname);
+  if (url.username || url.password || !(url.protocol === "https:" || (url.protocol === "http:" && (url.origin === page.origin || local)))) throw new Error("Invalid chat endpoint");
   return url.href;
 }
 
@@ -108,6 +110,7 @@ export function initChat() {
   chat.querySelector(".ff-chat-skip").addEventListener("click", event => { event.preventDefault(); input.focus(); });
   chat.querySelectorAll(".ff-chat-suggestions button").forEach(button => button.addEventListener("click", () => { input.value = button.textContent; input.focus(); resize(); }));
   input.addEventListener("input", resize);
+  window.addEventListener("resize", () => { if (chat.open) resize(); });
   input.addEventListener("keydown", event => { if (event.key === "Enter" && !event.shiftKey && !event.isComposing) { event.preventDefault(); if (!active) form.requestSubmit(); } });
   const paragraph = (text, className) => { const p = document.createElement("p"); p.className = className; p.textContent = text; return p; };
   form.addEventListener("submit", async event => {
