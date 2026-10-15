@@ -210,7 +210,7 @@ export function initChat() {
         const sources = document.createElement("ul"); sources.className = "ff-chat-sources"; sources.setAttribute("aria-label", "Sources");
         reply.sources.forEach(source => { const li = document.createElement("li"), a = document.createElement("a"); a.href = source.url; a.textContent = source.title || "Source"; a.target = "_blank"; a.rel = "noopener noreferrer"; a.setAttribute("aria-label", `${source.title || "Source"} (opens in a new tab)`); li.append(a); sources.append(li); });
         const details = document.createElement("details"); details.className = "ff-chat-source-panel";
-        const toggle = document.createElement("summary"); toggle.className = "ff-chat-source-toggle"; toggle.innerHTML = '<img src="/favicon.svg" alt="">Sources';
+        const toggle = document.createElement("summary"); toggle.className = "ff-chat-source-toggle"; toggle.innerHTML = '<img src="/favicon.svg?v=32" alt="">Sources';
         details.append(toggle, sources); actions.append(details);
       }
       const copy = document.createElement("button"); copy.type = "button"; copy.className = "ff-chat-copy"; copy.setAttribute("aria-label", "Copy"); copy.innerHTML = COPY; copy.title = "Copy response";
