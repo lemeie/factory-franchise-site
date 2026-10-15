@@ -1,5 +1,5 @@
 // Factory Franchise site behaviour. No dependencies.
-import { initChat } from "./chat.mjs?v=30";
+import { initChat } from "./chat.mjs?v=31";
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // Menu
@@ -80,8 +80,8 @@ document.querySelectorAll(".sq-stations").forEach(sq => {
 });
 
 // Planned standards from the concept, not certification marks.
-const SEALS = [["IPC-A-610", "Assemblies"], ["ISO 9001", "Quality"], ["ISO 13485", "Medical"],
-  ["EN 9100", "Aerospace"], ["IATF 16949", "Automotive"]];
+const SEALS = [["IPC-7711", "Rework"], ["J-STD-001", "Soldering"], ["IEC 61340", "ESD control"], ["IPC-A-610", "Assemblies"], ["ISO 9001", "Quality"],
+  ["ISO 13485", "Medical"], ["EN 9100", "Aerospace"], ["IATF 16949", "Automotive"], ["ISO 14001", "Environment"]];
 document.querySelectorAll(".sq-standards").forEach(sq => {
   sq.innerHTML = SEALS.map(([code, topic]) => `<div class="badge"><span>${code}<small>${topic}</small></span></div>`).join("");
 });
