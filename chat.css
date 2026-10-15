@@ -32,10 +32,12 @@ body.ff-chat-enter > :not(dialog) { animation: ff-chat-landing .26s cubic-bezier
 .ff-chat-answer-text h3 { font: 500 16px/24px "FF Chat Text", Arial, sans-serif; letter-spacing: -.03em; }
 .ff-chat-answer-text h3 + * { margin-top: 16px; }
 .ff-chat-answer-text strong { font-weight: 500; }
-.ff-chat-answer-text ul, .ff-chat-answer-text ol { counter-reset: item; list-style: none; padding-left: 16px; }
+.ff-chat-answer-text ul { list-style: none; padding-left: 16px; }
+.ff-chat-answer-text ol { list-style: decimal; padding-left: 32px; }
+.ff-chat-answer-text ol li { padding-left: 8px; }
 .ff-chat-answer-text li { position: relative; padding-left: 24px; margin-top: 8px; }
 .ff-chat-answer-text li::before { content: "•"; position: absolute; left: 0; font-weight: 500; }
-.ff-chat-answer-text ol li::before { counter-increment: item; content: counter(item) "."; font-weight: 400; }
+.ff-chat-answer-text ol li::before { content: none; }
 .ff-chat-answer-text li:first-child { margin-top: 0; }
 .ff-chat-token { animation: ff-chat-fade .15s ease both; }
 .ff-chat-actions { display: flex; align-items: start; gap: 8px; position: relative; margin-top: 24px; animation: ff-chat-fade .28s linear both; }

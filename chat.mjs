@@ -80,7 +80,7 @@ export function answerMarkup(text, streaming = false) {
   const inline = value => value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
   return text.split(/\n{2,}/).map(block => {
     const lines = block.split("\n");
-    if (lines.every(line => /^\d+[.)] /.test(line))) return `<ol>${lines.map(line => `<li>${inline(line.replace(/^\d+[.)] /, ""))}</li>`).join("")}</ol>`;
+    if (lines.every(line => /^\d+[.)] /.test(line))) return `<ol start="${Math.min(999999, Number.parseInt(lines[0], 10))}">${lines.map(line => `<li>${inline(line.replace(/^\d+[.)] /, ""))}</li>`).join("")}</ol>`;
     if (lines.every(line => /^[-*] /.test(line))) return `<ul>${lines.map(line => `<li>${inline(line.slice(2))}</li>`).join("")}</ul>`;
     if (/^#{1,3} /.test(block)) return `<h3>${inline(block.replace(/^#{1,3} /, ""))}</h3>`;
     return `<p>${inline(block).replace(/\n/g, "<br>")}</p>`;
@@ -211,7 +211,7 @@ export function initChat() {
         const sources = document.createElement("ul"); sources.className = "ff-chat-sources"; sources.setAttribute("aria-label", "Sources");
         reply.sources.forEach(source => { const li = document.createElement("li"), a = document.createElement("a"); a.href = source.url; a.textContent = source.title || "Source"; a.target = "_blank"; a.rel = "noopener noreferrer"; a.setAttribute("aria-label", `${source.title || "Source"} (opens in a new tab)`); li.append(a); sources.append(li); });
         const details = document.createElement("details"); details.className = "ff-chat-source-panel";
-        const toggle = document.createElement("summary"); toggle.className = "ff-chat-source-toggle"; toggle.innerHTML = '<img src="/favicon.svg?v=33" alt="">Sources';
+        const toggle = document.createElement("summary"); toggle.className = "ff-chat-source-toggle"; toggle.innerHTML = '<img src="/favicon.svg?v=34" alt="">Sources';
         details.append(toggle, sources); actions.append(details);
       }
       const copy = document.createElement("button"); copy.type = "button"; copy.className = "ff-chat-copy"; copy.setAttribute("aria-label", "Copy"); copy.innerHTML = COPY; copy.title = "Copy response";
